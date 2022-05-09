@@ -1,2 +1,2 @@
 # Gauth
-Google Authenticator client for .NET
+Google Authenticator for C#
