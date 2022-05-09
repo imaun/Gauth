@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Drawing;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using Emun.GAuth.Extensions;
 
 namespace Emun.GAuth
@@ -26,12 +24,12 @@ namespace Emun.GAuth
 
         private long getDefaultCounter() => getCounter(_defaultSeconds);
 
-        public string GetStupCode(string account, string appName, string secrectKey) {
+        public string GetStupCode(string account, string appName, string secrectKey, bool isBase32 = false) {
             if(string.IsNullOrEmpty(account)) {
                 throw new ArgumentNullException("Account name is null or empty.");
             }
 
-            var encodedSecretKey = secrectKey.ConvertToBytes(isBase32: true);
+            var encodedSecretKey = secrectKey.ConvertToBytes(isBase32);
             var normalizedAccount = Uri.EscapeUriString(account.RemoveWhiteSpaces());
             //TODO generate qrcode
 
@@ -41,16 +39,15 @@ namespace Emun.GAuth
         }
         
 
-        public string GeneratePIN(string secretKey, long counter, int codeLength = 6) {
-            var secretKeyBytes = secretKey.ConvertToBytes(isBase32: true);
+        public string GeneratePIN(string secretKey, long counter, int codeLength = 6, bool isBase32 = false) {
+            var secretKeyBytes = secretKey.ConvertToBytes(isBase32);
             return secretKeyBytes.ComputeHashCode(getCounter(counter), codeLength);
         }
 
-        public string GetCurrentPIN(string secrectKey, int codeLength = 6) {
-            var secretKeyBytes = secrectKey.ConvertToBytes(isBase32: true);
+        public string GetCurrentPIN(string secrectKey, int codeLength = 6, bool isBase32 = false) {
+            var secretKeyBytes = secrectKey.ConvertToBytes(isBase32);
             return secretKeyBytes.ComputeHashCode(getDefaultCounter(), codeLength);
         }
-
 
         /// <summary>
         /// Get All the possible PIN codes for the given timeWindow.
@@ -59,7 +56,7 @@ namespace Emun.GAuth
         /// <param name="timeWindow"></param>
         /// <param name="codeLength"></param>
         /// <returns></returns>
-        public List<string> GetAllPINS(string secretKey, TimeSpan timeWindow, int codeLength = 6) {
+        public List<string> GetAllPINS(string secretKey, TimeSpan timeWindow, int codeLength = 6, bool isBase32 = false) {
             var result = new List<string>();
             var counter = getDefaultCounter();
             var offset = 0;
@@ -73,7 +70,7 @@ namespace Emun.GAuth
 
             //generates all PINs within the given timeWindow
             for(var c = start; c <= end; c++) {
-                result.Add(GeneratePIN(secretKey, c, codeLength));
+                result.Add(GeneratePIN(secretKey, c, codeLength, isBase32));
             }
 
             return result;
