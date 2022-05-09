@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Collections.Generic;
 using System.Text;
+using System.Security.Cryptography;
 
-namespace Emun.GAuth.Extensions
-{
-    public static class Exts
-    {
+namespace Emun.GAuth.Extensions {
+
+    public static class Exts {
 
         public static string RemoveWhiteSpaces(this string str) {
             return new string(str.Where(c => !char.IsWhiteSpace(c)).ToArray());
@@ -36,11 +34,9 @@ namespace Emun.GAuth.Extensions
                 | (hash[offset + 2] << 8)
                 | hash[offset + 3];
                 
-            var result = intnum = % Convert.ToInt32(Math.Pow(10, codeLength));
+            var result = intnum % Convert.ToInt32(Math.Pow(10, codeLength));
             return result.ToString(new string('0', codeLength));
         }
-
-
 
     }
 }
