@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace Emun.GAuth.Extensions {
+namespace Emun.Auth.Extensions {
 
     public static class Exts {
 

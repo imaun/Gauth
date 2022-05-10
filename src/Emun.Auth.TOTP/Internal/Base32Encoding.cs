@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Emun.GAuth
+namespace Emun.Auth.TOTP
 {
     /// <summary>
     /// http://stackoverflow.com/questions/641361/base32-decoding
