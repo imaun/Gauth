@@ -1,4 +1,4 @@
-﻿using Emun.GAuth;
+﻿using Emun.Auth.TOTP;
 
 Console.WriteLine("Hello");
 
