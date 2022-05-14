@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
+using Emun.Auth.TOTP;
 
 namespace Emun.Auth.Extensions {
 

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Emun.Auth.TOTOP\Emun.Auth.TOTP.csproj" />
+    <ProjectReference Include="..\Emun.Auth.TOTP\Emun.Auth.TOTP.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
